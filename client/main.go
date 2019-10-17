@@ -17,7 +17,7 @@ func main() {
 		panic(err)
 	}
 
-	client := proto.NewAddServiceClient(conn)
+	addServiceClient := proto.NewAddServiceClient(conn)
 
 	g := gin.Default()
 
@@ -34,7 +34,7 @@ func main() {
 
 		req := &proto.Request{A: int64(a), B: int64(b)}
 
-		if response, err := client.Add(ctx, req); err == nil {
+		if response, err := addServiceClient.Add(ctx, req); err == nil {
 			ctx.JSON(http.StatusOK, gin.H{
 				"result": fmt.Sprint(response.Result),
 			})
@@ -56,7 +56,7 @@ func main() {
 
 		req := &proto.Request{A: int64(a), B: int64(b)}
 
-		if response, err := client.Multiply(ctx, req); err == nil {
+		if response, err := addServiceClient.Multiply(ctx, req); err == nil {
 			ctx.JSON(http.StatusOK, gin.H{
 				"result": fmt.Sprint(response.Result),
 			})
